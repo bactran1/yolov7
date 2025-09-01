@@ -15,6 +15,9 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
 
+cv2.CAP_PROP_FRAME_WIDTH = 2560
+cv2.CAP_PROP_FRAME_HEIGHT =1440
+
 def detect(save_img=False):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
     save_img = not opt.nosave and not source.endswith('.txt')  # save inference images
@@ -109,6 +112,8 @@ def detect(save_img=False):
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             if len(det):
                 # Rescale boxes from img_size to im0 size
+                #print(im0.shape)
+                #print(img.shape[2:])
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
 
                 # Print results
@@ -129,7 +134,7 @@ def detect(save_img=False):
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
 
             # Print time (inference + NMS)
-            print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
+            print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, FPS {(1/(t2-t1)):.1f}, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
             # Stream results
             if view_img:
