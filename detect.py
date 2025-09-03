@@ -15,8 +15,8 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
 
-cv2.CAP_PROP_FRAME_WIDTH = 2560
-cv2.CAP_PROP_FRAME_HEIGHT =1440
+#cv2.CAP_PROP_FRAME_WIDTH = 2560
+#cv2.CAP_PROP_FRAME_HEIGHT =1440
 
 def detect(save_img=False):
     source, weights, view_img, save_txt, imgsz, trace = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace
