@@ -6,8 +6,8 @@ REM YOLOv7 CPU environment bootstrapper (Windows)
 REM ============================================
 
 REM ---   Configurable bits   ---
-set "CONDA_DIR=%USERPROFILE%\Miniconda3"
-set "ENV_NAME=yolov7"
+set "CONDA_DIR=C:\ProgramData\miniconda3"
+set "ENV_NAME=yolov7-test"
 set "PY_VER=3.10"
 set "MINICONDA_VER=py311_24.7.1-0"
 set "MINICONDA_EXE=Miniconda3-%MINICONDA_VER%-Windows-x86_64.exe"
@@ -38,12 +38,12 @@ if not exist "%CONDA_DIR%\Scripts\conda.exe" (
     exit /b 1
   )
   echo [INFO] Running silent installer...
-  "%TMP_DL%" /S /InstallationType=JustMe /AddToPath=1 /RegisterPython=0 /D=%CONDA_DIR%
+  "%TMP_DL%" /InstallationType=JustMe /AddToPath=1 /RegisterPython=0 /D=%CONDA_DIR%
   if errorlevel 1 (
     echo [ERROR] Miniconda installation failed.
     exit /b 1
   )
-  del /q "%TMP_DL%" >nul 2>&1
+REM  del /q "%TMP_DL%" >nul 2>&1
 ) else (
   echo [INFO] Miniconda already present at %CONDA_DIR%.
 )
@@ -80,13 +80,13 @@ python -m pip install --upgrade pip setuptools wheel
 
 REM --- Install PyTorch CPU wheels ---
 echo [INFO] Installing PyTorch CPU build...
-python -m pip install --index-url https://download.pytorch.org/whl/cpu ^
+python -m pip install --index-url https://download.pytorch.org/whl/cu128 ^
   torch torchvision torchaudio
 
 REM --- Install YOLOv7 dependencies ---
 echo [INFO] Installing YOLOv7 dependencies...
 python -m pip install ^
-  opencv-python ^
+  opencv-python>=4.1.1 ^
   numpy ^
   matplotlib ^
   seaborn ^
