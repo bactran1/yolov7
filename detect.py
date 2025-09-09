@@ -118,8 +118,8 @@ def detect(save_img=False):
 
                 # Print res s
                 for c in det[:, -1].unique():
-                    n = (det[:, -1] == c).sum()  # detections per class
-                    s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+                    n = (det[:, -1] == c).sum() * 131  # detections per class
+                    s += f"{n} PPH {names[int(c)]}{'s' * (n > 1)}, "  # add to string
 
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
