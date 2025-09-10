@@ -1,1 +1,1 @@
-python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source "rtsp://admin:csecsecse1@192.168.8.244:554/cam/realmonitor?channel=1&subtype=0" | tee testOutput.txt
+python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source 0 --length 10 --speed 131 | tee testOutput.txt
