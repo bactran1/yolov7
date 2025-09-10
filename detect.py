@@ -122,8 +122,8 @@ def detect(save_img=False):
                 # Print res s
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
-                    n = (n/length) * (speed*60)
-                    s += f"{n} PPH {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+                    pph = (n/length) * (speed*60)
+                    s += f"{n} {names[int(c)]}{'s' * (n > 1)}, {pph} PPH "  # add to string
 
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
