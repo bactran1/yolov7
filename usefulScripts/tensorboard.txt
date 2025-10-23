@@ -1,1 +1,1 @@
-tensorboard --logdir runs/train --bind-all
+tensorboard --logdir runs/train --bind_all
